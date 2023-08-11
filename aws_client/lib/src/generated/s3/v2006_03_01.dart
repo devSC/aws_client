@@ -4781,11 +4781,15 @@ class S3 {
         'response-expires': [_s.rfc822ToJson(responseExpires).toString()],
       if (versionId != null) 'versionId': [versionId],
     };
-    var requestUrl = '/${Uri.encodeComponent(bucket)}/${key.split('/').map(Uri.encodeComponent).join('/')}';
-    if (accelerateModeEnabled) requestUrl = '/${key.split('/').map(Uri.encodeComponent).join('/')}';;
+    var requestUrl = "";
+    if (accelerateModeEnabled) {
+      requestUrl = '/${key.split('/').map(Uri.encodeComponent).join('/')}';
+    } else {
+      requestUrl = '/${Uri.encodeComponent(bucket)}/${key.split('/').map(Uri.encodeComponent).join('/')}';
+    }
     final $result = await _protocol.sendRaw(
       method: 'GET',
-      requestUri: requestUrl
+      requestUri: requestUrl,
       queryParams: $query,
       headers: headers,
       exceptionFnMap: _exceptionFns,
@@ -9949,8 +9953,12 @@ class S3 {
       if (websiteRedirectLocation != null)
         'x-amz-website-redirect-location': websiteRedirectLocation.toString(),
     };
-    var requestUrl = '/${Uri.encodeComponent(bucket)}/${key.split('/').map(Uri.encodeComponent).join('/')}';
-    if (accelerateModeEnabled) requestUrl = '/${key.split('/').map(Uri.encodeComponent).join('/')}';;
+    var requestUrl = "";
+    if (accelerateModeEnabled) {
+      requestUrl = '/${key.split('/').map(Uri.encodeComponent).join('/')}';
+    } else {
+      requestUrl = '/${Uri.encodeComponent(bucket)}/${key.split('/').map(Uri.encodeComponent).join('/')}';
+    }
     final $result = await _protocol.sendRaw(
       method: 'PUT',
       requestUri: requestUrl,

@@ -4742,7 +4742,7 @@ class S3 {
     Uint8List? sSECustomerKey,
     String? sSECustomerKeyMD5,
     String? versionId,
-    bool isAccelerateModeEnabled = false,
+    bool accelerateModeEnabled = false,
   }) async {
     final headers = <String, String>{
       if (checksumMode != null) 'x-amz-checksum-mode': checksumMode.toValue(),
